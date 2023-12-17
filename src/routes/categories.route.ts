@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
-import CategoriesController from '@/controllers/categories.controller';
-import { CreateCategoryDto } from '@/dtos/categories.dto';
+import CategoriesController from '@controllers/categories.controller';
+import { CreateCategoryDto } from '@dtos/categories.dto';
 
 class CategoriesRoute implements Routes {
   public path = '/categories';

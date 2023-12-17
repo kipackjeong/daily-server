@@ -19,8 +19,7 @@ const userSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-});
+}).index({ email: 1 });
 
 const userModel = model<IUser & Document>('User', userSchema);
-
 export default userModel;

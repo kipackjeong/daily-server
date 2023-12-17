@@ -1,4 +1,4 @@
-import { DB_URL } from '@config';
+import { DB_URL } from '@config/index';
 import { ConnectOptions } from 'mongoose';
 
 type dbConnectionType = {

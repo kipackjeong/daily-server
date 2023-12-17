@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateCategoryDto } from '@dtos/categories.dto';
 import CategoriesService from '@services/categories.service';
-import IController from '@/interfaces/controller.interface';
-import ICategory from '@/interfaces/categories.interface';
+import IController from '@interfaces/controller.interface';
+import ICategory from '@interfaces/categories.interface';
 
 class CategoriesController implements IController<ICategory> {
   public categoriesService = new CategoriesService();

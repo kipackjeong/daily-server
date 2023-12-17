@@ -2,8 +2,8 @@ import { NextFunction, Response } from 'express';
 import { CreateTaskDto } from '@dtos/tasks.dto';
 import ITask from '@interfaces/tasks.interface';
 import TaskService from '@services/tasks.service';
-import IController from '@/interfaces/controller.interface';
-import { RequestWithUser } from '@/interfaces/auth.interface';
+import { RequestWithUser } from '@interfaces/auth.interface';
+import IController from '@interfaces/controller.interface';
 
 class TasksController implements IController<ITask> {
   public taskService = new TaskService();

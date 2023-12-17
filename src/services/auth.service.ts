@@ -1,6 +1,6 @@
 import { hash, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { SECRET_KEY } from '@config';
+import { SECRET_KEY } from '@config/index';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
@@ -13,14 +13,15 @@ class AuthService {
 
   public async signup(userData: CreateUserDto): Promise<IUser> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
-
-    const findUser: IUser = await this.users.findOne({ email: userData.email });
-    if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
-
-    const hashedPassword = await hash(userData.password, 10);
-    const createUserData: IUser = await this.users.create({ ...userData, password: hashedPassword });
-
-    return createUserData;
+    try {
+      const findUser: IUser = await this.users.findOne({ email: userData.email });
+      if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
+    } catch (error) {
+    } finally {
+      const hashedPassword = await hash(userData.password, 10);
+      const createUserData = await this.users.create({ ...userData, password: hashedPassword });
+      return createUserData;
+    }
   }
 
   public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: IUser }> {
